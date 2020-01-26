@@ -2,5 +2,6 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="cuba-first-encounter" transaction-type="RESOURCE_LOCAL">
 
+        <class>com.company.cubafirstencounter.entity.Speaker</class>
     </persistence-unit>
 </persistence>
