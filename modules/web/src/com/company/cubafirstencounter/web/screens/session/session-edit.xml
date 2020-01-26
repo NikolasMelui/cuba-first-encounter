@@ -29,7 +29,7 @@
                         <action id="lookup" type="picker_lookup"/>
                     </actions>
                 </lookupPickerField>
-                <textField id="descriptionField" property="description"/>
+                <textArea id="descriptionField" property="description"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
