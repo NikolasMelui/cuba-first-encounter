@@ -7,5 +7,14 @@
     <context:component-scan base-package="com.company.cubafirstencounter"/>
     
     <gui:screens base-packages="com.company.cubafirstencounter.web"/>
+    <bean id="cubafirstencounter_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="cubafirstencounter_SessionService"
+                       value="com.company.cubafirstencounter.service.SessionService"/>
+            </map>
+        </property>
+    </bean>
 
 </beans>

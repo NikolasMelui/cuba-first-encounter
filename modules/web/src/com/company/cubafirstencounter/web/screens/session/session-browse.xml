@@ -14,8 +14,8 @@
             </loader>
         </collection>
     </data>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode height="auto"
+                positionX="0" positionY="0" width="auto"/>
     <layout expand="sessionsTab"
             spacing="true">
         <filter id="filter"
