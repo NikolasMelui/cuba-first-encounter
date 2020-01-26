@@ -2,5 +2,6 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-cubafirstencounter" insertBefore="administration">
         <item screen="cubafirstencounter_Speaker.browse"/>
+        <item screen="cubafirstencounter_Session.browse"/>
     </menu>
 </menu-config>
