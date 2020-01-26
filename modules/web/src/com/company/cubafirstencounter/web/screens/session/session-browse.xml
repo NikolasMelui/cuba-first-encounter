@@ -16,37 +16,49 @@
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="sessionsTable"
+    <layout expand="sessionsTab"
             spacing="true">
         <filter id="filter"
                 applyTo="sessionsTable"
-                dataLoader="sessionsDl">
+                dataLoader="sessionsDl" responsive="true">
             <properties include=".*"/>
         </filter>
-        <groupTable id="sessionsTable"
-                    width="100%"
-                    dataContainer="sessionsDc">
-            <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
-            </actions>
-            <columns>
-                <column id="topic"/>
-                <column id="startDate"/>
-                <column id="endDate"/>
-                <column id="speaker"/>
-                <column id="description"/>
-            </columns>
-            <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
-                <button id="createBtn" action="sessionsTable.create"/>
-                <button id="editBtn" action="sessionsTable.edit"/>
-                <button id="removeBtn" action="sessionsTable.remove"/>
-            </buttonsPanel>
-        </groupTable>
-        <hbox id="lookupActions" spacing="true" visible="false">
+        <tabSheet id="sessionsTab" responsive="true">
+            <tab caption="Table" margin="true,false,false,false" spacing="true" id="tableTab"
+            >
+                <groupTable id="sessionsTable"
+                            width="100%"
+                            dataContainer="sessionsDc" responsive="true">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="topic"/>
+                        <column id="startDate"/>
+                        <column id="endDate"/>
+                        <column id="speaker"/>
+                        <column id="description"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="sessionsTable.create"/>
+                        <button id="editBtn" action="sessionsTable.edit"/>
+                        <button id="removeBtn" action="sessionsTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+            </tab>
+            <tab caption="Calendar" margin="true,false,false,false" spacing="true" id="calendarTab"
+                 expand="sessionsCalendar" icon="ANCHOR">
+                <calendar id="sessionsCalendar" descriptionProperty="description"
+                          endDateProperty="endDate" lastVisibleDayOfWeek="7" lastVisibleHourOfDay="18"
+                          startDateProperty="startDate" firstVisibleHourOfDay="8" firstVisibleDayOfWeek="1"
+                          dataContainer="sessionsDc" captionProperty="topic" responsive="true" navigationButtonsVisible="true"/>
+            </tab>
+        </tabSheet>
+        <hbox id="lookupActions" spacing="true" visible="false" responsive="true">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>
         </hbox>
