@@ -1,11 +1,15 @@
 package com.company.cubafirstencounter.web.screens.session;
 
+import com.company.cubafirstencounter.service.SessionService;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Calendar;
+import com.haulmont.cuba.gui.components.calendar.EntityCalendarEvent;
 import com.haulmont.cuba.gui.screen.*;
 import com.company.cubafirstencounter.entity.Session;
 
 import javax.inject.Inject;
+import javax.management.Notification;
 
 @UiController("cubafirstencounter_Session.browse")
 @UiDescriptor("session-browse.xml")
@@ -14,6 +18,10 @@ import javax.inject.Inject;
 public class SessionBrowse extends StandardLookup<Session> {
     @Inject
     private ScreenBuilders screenBuilders;
+    @Inject
+    private Notifications notifications;
+    @Inject
+    private SessionService sessionService;
 
     @Subscribe("sessionsCalendar")
     public void onSessionsCalendarCalendarEventClick(Calendar.CalendarEventClickEvent event) {
@@ -26,4 +34,20 @@ public class SessionBrowse extends StandardLookup<Session> {
         });
         screen.show();
     }
+
+    @Subscribe("sessionsCalendar")
+    public void onSessionsCalendarCalendarEventMove(Calendar.CalendarEventMoveEvent event) {
+        Session session = ((EntityCalendarEvent<Session>)event.getCalendarEvent()).getEntity();
+
+        if (!sessionService.rescheduleSession(session, event.getNewStart())) {
+            notifications.create(Notifications.NotificationType.WARNING)
+                    .withCaption("Session "+session.getTopic()+" cannot be rescheduled to "+event.getNewStart()+" due to a conflict")
+                    .show();
+        }
+
+        getScreenData().loadAll();
+    }
+    
+    
+
 }
